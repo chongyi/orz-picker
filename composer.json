@@ -16,11 +16,16 @@
         "symfony/console": "^3.1",
         "symfony/dom-crawler": "^3.1",
         "symfony/css-selector": "^3.1",
-        "symfony/finder": "^3.1"
+        "symfony/finder": "^3.1",
+        "illuminate/container": "5.1.*",
+        "illuminate/support": "5.1.*"
     },
     "autoload": {
         "psr-4": {
             "OrzPicker\\": "src/"
-        }
+        },
+        "classmap": [
+            "tasks"
+        ]
     }
 }
