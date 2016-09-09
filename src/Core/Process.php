@@ -8,6 +8,7 @@
 
 namespace OrzPicker\Core;
 
+use Closure;
 
 /**
  * Class Process
@@ -46,18 +47,22 @@ abstract class Process
         foreach ($this->getTasks() as $task) {
             $taskInstance = $this->buildTaskInstance($task);
 
-            call_user_func([$taskInstance, 'handle'], $poster);
+            call_user_func($taskInstance, $poster);
         }
     }
 
     /**
      * @param $task
      *
-     * @return mixed
+     * @return callable
      */
     protected function buildTaskInstance($task)
     {
-        return $this->app->make($task);
+        if ($task instanceof Closure) {
+            return $task;
+        }
+
+        return [$this->app->make($task), 'handle'];
     }
 
     /**
